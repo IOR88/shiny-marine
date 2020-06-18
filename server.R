@@ -22,5 +22,9 @@ shinyServer(function(input, output) {
         hist(x, breaks = bins, col = 'darkgray', border = 'white')
 
     })
+    
+    output$testing_var <- renderText({ 
+        sprintf("The user has selected %s", input$bins)
+    })
 
 })
