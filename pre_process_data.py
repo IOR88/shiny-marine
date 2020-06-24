@@ -83,6 +83,9 @@ def get_observations(df, ships):
     """
     Here we plan to loop over each ship id dataset and find observations between which
     timedelta is around 30 minutes. Next we need to select longest one and save it.
+    
+    
+    This is not efficient we could only use it on demand when we consider one ship.
     :param df:
     :param ships: list
     :return:
