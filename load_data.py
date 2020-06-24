@@ -2,6 +2,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 from collections import Counter
 import psycopg2
+import io
 
 
 def main():
@@ -38,10 +39,39 @@ def test():
     session.close()
 
 
+def to_sql(engine, df, table, if_exists='fail', sep='\t', encoding='utf8'):
+    """
+    Speeding up native pandas to sql
+    :param engine:
+    :param df:
+    :param table:
+    :param if_exists:
+    :param sep:
+    :param encoding:
+    :return:
+    """
+    # Create Table
+    df[:0].to_sql(table, engine, if_exists=if_exists)
+
+    # Prepare data
+    output = io.StringIO()
+    df.to_csv(output, sep=sep, header=False, encoding=encoding)
+    output.seek(0)
+
+    # Insert data
+    connection = engine.raw_connection()
+    cursor = connection.cursor()
+    cursor.copy_from(output, table, sep=sep, null='')
+    connection.commit()
+    cursor.close()
+
+
 if __name__ == "__main__":
     test()
     print('Reading dataset.\n')
     df = main()
     print('Writing dataset.\n')
-    write(df)
+    # write(df)
+    engine = create_engine('postgresql+psycopg2://marine:1234@127.0.0.1/marine')
+    to_sql(engine, df, 'observations', if_exists='replace')
     test()
