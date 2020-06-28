@@ -67,7 +67,7 @@ def to_sql(engine, df, table, if_exists='fail', sep='\t', encoding='utf8'):
 
 
 if __name__ == "__main__":
-    test()
+    # test()
     print('Reading dataset.\n')
     df = main()
     print('Writing dataset.\n')
