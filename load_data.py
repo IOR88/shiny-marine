@@ -75,3 +75,8 @@ if __name__ == "__main__":
     engine = create_engine('postgresql+psycopg2://marine:1234@127.0.0.1/marine')
     to_sql(engine, df, 'observations', if_exists='replace')
     test()
+
+# SELECT "DATETIME", "LAT", "LON", "DESTINATION", "SHIPNAME", "SHIPTYPE", "SHIP_ID", ship_type
+# FROM public.observations WHERE "SHIP_ID"=2764 ORDER BY "DATETIME" DESC;
+# SELECT DISTINCT "SHIP_ID", "SHIPNAME" FROM public.observations;
+# SELECT DISTINCT "SHIPTYPE", "ship_type" FROM public.observations;

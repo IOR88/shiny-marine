@@ -43,15 +43,19 @@ Part of the work was done on jupyternotebook which will be attached separately
 for confidential reasons as it extract information about dataset.
 
 ### 1. Create generic interface to read data.
-Here we will try to use best techniques we have found so far.
+We have created a separate R script responsible for connection with database.
+The module has defined query strings and functions which execute them.
 
 ### 2. Access data from shiny app through interface.
-Maybe we will use dplyr R library to access data from db latter. We would like
-to create kind of generic selectors which could be than used inside server 
-handler.
+Ui and Server are accessing the script and fetching data they need. So db.R is
+a single source of truth for getting data structures.
 
 ### 3. Integrate custom UI elements (Leaflet.js) and encapsulate ui dropdowns.
 Not sure how to cover this point, if possible we will use custom js file for shiny
 app.
 
 ### 4. Tests
+
+
+### 5. Improvements.
+* Adding SQL views for types and ship names. 

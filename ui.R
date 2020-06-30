@@ -8,27 +8,32 @@
 #
 
 library(shiny)
+if(!exists("getShipTypes", mode="function")) source("db.R")
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
 
     # Application title
-    titlePanel("Old Faithful Geyser Data Modified"),
+    titlePanel("Marine ships observations."),
 
     # Sidebar with a slider input for number of bins
+    
     sidebarLayout(
+        
         sidebarPanel(
-            sliderInput("bins",
-                        "Number of bins:",
-                        min = 1,
-                        max = 50,
-                        value = 30)
+            selectInput(inputId = "select_ship_types", label = strong("Ship Type"),
+                        choices = getShipTypes()
+            ),
+            selectInput(inputId = "select_ship_names", label = strong("Ship Name"),
+                        choices = c()
+            )
         ),
 
-        # Show a plot of the generated distribution
         mainPanel(
-            plotOutput("distPlot"),
-            textOutput("testing_var")
+            textOutput("observation_description"),
+            tableOutput("data")
         )
     )
 ))
+
+

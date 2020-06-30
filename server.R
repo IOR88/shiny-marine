@@ -8,23 +8,26 @@
 #
 
 library(shiny)
+if(!exists("getShipNames", mode="function")) source("db.R")
 
 # Define server logic required to draw a histogram
-shinyServer(function(input, output) {
-
-    output$distPlot <- renderPlot({
-
-        # generate bins based on input$bins from ui.R
-        x    <- faithful[, 2]
-        bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
-        # draw the histogram with the specified number of bins
-        hist(x, breaks = bins, col = 'darkgray', border = 'white')
-
-    })
+shinyServer(function(input, output, session) {
     
-    output$testing_var <- renderText({ 
-        sprintf("The user has selected %s", input$bins)
+#    output$data <- renderTable({
+#        getShipNames(input$select_ship_types)
+#    })
+    
+    observe({
+        x <- input$select_ship_types
+        
+        updateSelectInput(session, "select_ship_names",
+                          choices = getShipNames(x)
+        )
     })
+
+    
+#    output$observation_description <- renderText({
+#        input$select_ship_types
+#    })
 
 })
