@@ -8,6 +8,8 @@
 #
 
 library(shiny)
+library(leaflet)
+
 if(!exists("getShipTypes", mode="function")) source("db.R")
 
 # Define UI for application that draws a histogram
@@ -31,6 +33,7 @@ shinyUI(fluidPage(
 
         mainPanel(
             textOutput("observation_description"),
+            leafletOutput("mymap"),
             tableOutput("data")
         )
     )

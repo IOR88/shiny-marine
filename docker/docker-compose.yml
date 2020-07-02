@@ -3,6 +3,9 @@ version: '3.7'
 services:
 
   postgres:
+    # https://docs.docker.com/compose/compose-file/#container_name
+    # just for demo purposes, scaling not possible when container name is used.
+    container_name: marine_postgres
     restart: always
     build:
       context: ./postgres

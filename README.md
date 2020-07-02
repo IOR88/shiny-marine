@@ -52,10 +52,18 @@ a single source of truth for getting data structures.
 
 ### 3. Integrate custom UI elements (Leaflet.js) and encapsulate ui dropdowns.
 Not sure how to cover this point, if possible we will use custom js file for shiny
-app.
+app. Initially I have planned to create a htmlwidget https://shiny.rstudio.com/articles/js-build-widget.html but I have found existing
+one https://rstudio.github.io/leaflet/. And because of limited time for this project
+will use the existing widget.
 
 ### 4. Tests
 
 
 ### 5. Improvements.
 * Adding SQL views for types and ship names. 
+
+### 6. Instalation.
+#### 6.1. Leaflet and dependencies
+Problem with leaflet installation. "ERROR: dependency ‘raster’ is not available for package ‘leaflet’". Tried to install raster https://rstudio.github.io/leaflet/raster.html. After that leaflet installation is ok.
+
+### 7. Deployment

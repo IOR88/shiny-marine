@@ -26,6 +26,9 @@ queryShipTypes = "SELECT DISTINCT ship_type FROM public.observations ORDER BY sh
 queryShipNames = "SELECT DISTINCT \"SHIPNAME\" FROM public.observations 
                   WHERE ship_type=$1 ORDER BY \"SHIPNAME\";"
 
+queryObservations = "SELECT \"DATETIME\", \"LAT\" , \"LON\", \"DESTINATION\" FROM public.observations 
+                  WHERE \"SHIPNAME\"=$1 ORDER BY \"DATETIME\" ASC;"
+
 getShipTypes <- function(){
   res <- dbSendQuery(con, queryShipTypes)
   data <- dbFetch(res)
@@ -36,6 +39,14 @@ getShipTypes <- function(){
 getShipNames <- function(shipType){
   res <- dbSendQuery(con, queryShipNames)
   dbBind(res, list(shipType))
+  data <- dbFetch(res)
+  dbClearResult(res)
+  data
+}
+
+getShipObservations <- function(shipName){
+  res <- dbSendQuery(con, queryObservations)
+  dbBind(res, list(shipName))
   data <- dbFetch(res)
   dbClearResult(res)
   data

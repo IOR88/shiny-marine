@@ -8,14 +8,13 @@
 #
 
 library(shiny)
+library(leaflet)
 if(!exists("getShipNames", mode="function")) source("db.R")
+if(!exists("getShipObservations", mode="function")) source("db.R")
+if(!exists("getLongestObservation", mode="function")) source("observations.R")
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output, session) {
-    
-#    output$data <- renderTable({
-#        getShipNames(input$select_ship_types)
-#    })
     
     observe({
         x <- input$select_ship_types
@@ -24,10 +23,29 @@ shinyServer(function(input, output, session) {
                           choices = getShipNames(x)
         )
     })
-
     
-#    output$observation_description <- renderText({
-#        input$select_ship_types
-#    })
+    observe({
+        x <- input$select_ship_names
+        observations <- getShipObservations(x)
+        
+        if(nrow(observations)!=0){
+            results = getLongestObservation(observations)
+            distance = results@first
+            ob1 = results@second
+            ob2 = results@third
+            
+            output$data <- renderTable({
+                observations
+            })
+            
+            output$mymap <- renderLeaflet({
+                leaflet(data = array(ob1, ob2)) %>%
+                    addProviderTiles(providers$Stamen.TonerLite,
+                                     options = providerTileOptions(noWrap = TRUE)
+                    ) %>%
+                    addMarkers(~LON, ~LAT, popup = ~DESTINATION)
+            })
+        }
+    })
 
 })
