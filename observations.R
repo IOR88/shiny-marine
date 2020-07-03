@@ -11,16 +11,19 @@ getLongestObservation <- function(observations){
   for (x in 1:nrow(observations)){
     temp_ob1 = observations[x,]
     temp_ob2 = observations[x+1,]
+    
 
     temp_distance = distm (
-      c(temp_ob1["LON"], temp_ob1["LAT"]), c(temp_ob2["LON"], temp_ob2["LAT"]), 
+      c(temp_ob1[,"LON"], temp_ob1[,"LAT"]), c(temp_ob2[,"LON"], temp_ob2[,"LAT"]), 
       fun = distHaversine
     )
-    if(temp_distance > distance){
-       dinstance <- temp_distance
+
+    if(!is.na(temp_distance[,]) && temp_distance[,] > distance){
+       distance <- temp_distance[,]
        ob1 <- temp_ob1
        ob2 <- temp_ob2
     }
   }
-  return(distance, ob1, ob2)
+  
+  c(distance, ob1, ob2)
 }

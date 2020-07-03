@@ -57,7 +57,12 @@ one https://rstudio.github.io/leaflet/. And because of limited time for this pro
 will use the existing widget.
 
 ### 4. Tests
-
+Encountered problems with testthat package. In order to solve installed first:
+```R
+install.packages("devtools", dependencies = TRUE)
+```
+There is a problem with devtools installation a lot of dependnecies are missing
+or cannot be built.
 
 ### 5. Improvements.
 * Adding SQL views for types and ship names. 

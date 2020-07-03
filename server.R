@@ -30,20 +30,28 @@ shinyServer(function(input, output, session) {
         
         if(nrow(observations)!=0){
             results = getLongestObservation(observations)
-            distance = results@first
-            ob1 = results@second
-            ob2 = results@third
+            distance = results[[1]]
+            ob1 = results[2:5]
+            ob2 = results[6:9]
+            ob1 <- as.data.frame(ob1)
+            ob2 <- as.data.frame(ob2)
+            observations <- rbind(ob1, ob2)
+            
             
             output$data <- renderTable({
                 observations
             })
             
             output$mymap <- renderLeaflet({
-                leaflet(data = array(ob1, ob2)) %>%
+                leaflet(data = observations) %>%
                     addProviderTiles(providers$Stamen.TonerLite,
                                      options = providerTileOptions(noWrap = TRUE)
                     ) %>%
                     addMarkers(~LON, ~LAT, popup = ~DESTINATION)
+            })
+            
+            output$observation_description <- renderText({
+                paste("The longest distance between 2 consecutive points is ", distance)
             })
         }
     })
