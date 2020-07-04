@@ -6,20 +6,14 @@ POSTGRES_USER=Sys.getenv(x = "POSTGRES_USER")
 POSTGRES_PASSWORD=Sys.getenv(x = "POSTGRES_PASSWORD")
 POSTGRES_HOST=Sys.getenv(x = "POSTGRES_HOST")
 POSTGRES_PORT=Sys.getenv(x = "POSTGRES_PORT")
+
 # database connection
-#con <- dbConnect(RPostgres::Postgres(),
-#                 dbname = POSTGRES_DATABASE|"marine", 
-#                 host = POSTGRES_HOST || "localhost",
-#                 port = POSTGRES_PORT || 5432,
-#                 user = POSTGRES_USER || "marine",
-#                 password = POSTGRES_PASSWORD || 1234
-#                 )
 con <- dbConnect(RPostgres::Postgres(),
-                 dbname = "marine", 
-                 host = "marine_postgres",
-                 port = 5432,
-                 user = "marine",
-                 password = 1234
+                 dbname = POSTGRES_DATABASE, 
+                 host = POSTGRES_HOST,
+                 port = POSTGRES_PORT,
+                 user = POSTGRES_USER,
+                 password = POSTGRES_PASSWORD
 )
 # query selectors
 queryShipTypes = "SELECT DISTINCT ship_type FROM public.observations ORDER BY ship_type;"
