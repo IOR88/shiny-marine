@@ -18,15 +18,17 @@ shinyServer(function(input, output, session) {
     
     observe({
         x <- input$select_ship_types
-        
+        getReactiveShipNames <- reactive({getShipNames(x)})
+        shipNames <- getReactiveShipNames()
         updateSelectInput(session, "select_ship_names",
-                          choices = getShipNames(x)
+                          choices = shipNames
         )
     })
     
     observe({
         x <- input$select_ship_names
-        observations <- getShipObservations(x)
+        getReactiveObservations <- reactive({getShipObservations(x)})
+        observations <- getReactiveObservations()
         
         if(nrow(observations)!=0){
             results = getLongestObservation(observations)
