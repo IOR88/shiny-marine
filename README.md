@@ -99,3 +99,7 @@ But at the end this solved the package installation
 install.packages('RPostgres', dependencies=TRUE, repos='http://cran.rstudio.com/')
 ```
 
+### 8. Performance and Profiling, Benchmarks 
+https://shiny.rstudio.com/articles/profiling.html
+https://shiny.rstudio.com/articles/async.html
+
