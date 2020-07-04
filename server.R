@@ -37,10 +37,12 @@ shinyServer(function(input, output, session) {
         getReactiveObservations <- reactive({getShipObservations(x)})
         observations <- getReactiveObservations()
         
+        
         if(nrow(observations)!=0){
             results = getLongestObservation(observations)
             distance = results[[1]]
             observations <- as.data.frame(results[2:5])
+            observations$DATETIME <- as.POSIXct(observations$DATETIME, origin="1970-01-01")
             
             output$data <- renderTable({
                 observations
@@ -56,7 +58,7 @@ shinyServer(function(input, output, session) {
             })
             
             output$observation_description <- renderText({
-                paste("The longest distance between 2 consecutive points is ", distance)
+                paste("The longest distance between 2 consecutive points is ", distance, " meters.")
             })
         }
     })

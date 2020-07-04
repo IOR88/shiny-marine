@@ -67,7 +67,7 @@ or cannot be built.
 ### 5. Improvements.
 * Adding SQL views for types and ship names.
 * Providing secure way to include or pass ENV variables to shiny application.
-* Installation of devtools
+* Installation of devtools and provide more unittests
 
 ### 6. Instalation.
 #### 6.1. Leaflet and dependencies
