@@ -68,9 +68,18 @@ or cannot be built.
 * Adding SQL views for types and ship names.
 * Providing secure way to include or pass ENV variables to shiny application.
 * Installation of devtools and provide more unittests
+* Verify R dependencies to speed up building process, put R pakcages to intermediate
+container to avoid redundant builds.
 
 ### 6. Instalation.
 #### 6.1. Leaflet and dependencies
 Problem with leaflet installation. "ERROR: dependency ‘raster’ is not available for package ‘leaflet’". Tried to install raster https://rstudio.github.io/leaflet/raster.html. After that leaflet installation is ok.
 
 ### 7. Deployment
+In order to do quick deployment we have used already existing docker image for R 
+and shiny apps. 
+In order to install RPostgres package, ubuntu need libpq-dev
+```
+apt-get install libpq-dev
+```
+

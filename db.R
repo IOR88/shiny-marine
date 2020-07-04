@@ -16,7 +16,7 @@ POSTGRES_PORT=Sys.getenv(x = "POSTGRES_PORT")
 #                 )
 con <- dbConnect(RPostgres::Postgres(),
                  dbname = "marine", 
-                 host = "localhost",
+                 host = "marine_postgres",
                  port = 5432,
                  user = "marine",
                  password = 1234
