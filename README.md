@@ -1,6 +1,12 @@
 # shiny-marine
-Shiny and R introductory project 
+Shiny and R introductory project
 
+General diagram of architecture
+![image general diagram of architecture](diagrams-shiny-marine-Page-1.png)
+Main use case and possible solution
+![image main use case and possible solution](diagrams-shiny-marine-Page-2.png)
+Data pre-processing in context of shiny R application
+![image data pre-processing in context of shiny R application](diagrams-shiny-marine-Page-4.png)
 ## project steps
 ### X. UML architecture and business model.
 Providing diagram representing architecture dictated by business
@@ -62,7 +68,10 @@ Encountered problems with testthat package. In order to solve installed first:
 install.packages("devtools", dependencies = TRUE)
 ```
 There is a problem with devtools installation a lot of dependnecies are missing
-or cannot be built.
+or cannot be built and in order to solve.
+```bash
+apt-get install libssl-dev libxml2-dev libcurl4-openssl-dev -y
+```
 
 ### 5. Improvements.
 * Adding SQL views for types and ship names.
@@ -81,5 +90,9 @@ and shiny apps.
 In order to install RPostgres package, ubuntu need libpq-dev
 ```
 apt-get install libpq-dev
+```
+But at the end this solved the package installation
+```R
+install.packages('RPostgres', dependencies=TRUE, repos='http://cran.rstudio.com/')
 ```
 
