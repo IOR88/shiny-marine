@@ -40,8 +40,8 @@ shinyServer(function(input, output, session) {
         
         if(nrow(observations)!=0){
             results = getLongestObservation(observations)
-            distance = results[[1]]
-            observations <- as.data.frame(results[2:5])
+            distance <- attributes(results)$distance
+            observations <- attributes(results)$observations
             observations$DATETIME <- as.POSIXct(observations$DATETIME, origin="1970-01-01")
             
             output$data <- renderTable({
