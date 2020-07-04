@@ -31,12 +31,7 @@ shinyServer(function(input, output, session) {
         if(nrow(observations)!=0){
             results = getLongestObservation(observations)
             distance = results[[1]]
-            ob1 = results[2:5]
-            ob2 = results[6:9]
-            ob1 <- as.data.frame(ob1)
-            ob2 <- as.data.frame(ob2)
-            observations <- rbind(ob1, ob2)
-            
+            observations <- as.data.frame(results[2:5])
             
             output$data <- renderTable({
                 observations
@@ -47,7 +42,8 @@ shinyServer(function(input, output, session) {
                     addProviderTiles(providers$Stamen.TonerLite,
                                      options = providerTileOptions(noWrap = TRUE)
                     ) %>%
-                    addMarkers(~LON, ~LAT, popup = ~DESTINATION)
+                    addMarkers(~LON, ~LAT, popup = ~DESTINATION) %>%
+                    addPolylines(~LON, ~LAT)
             })
             
             output$observation_description <- renderText({

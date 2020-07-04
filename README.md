@@ -65,7 +65,9 @@ There is a problem with devtools installation a lot of dependnecies are missing
 or cannot be built.
 
 ### 5. Improvements.
-* Adding SQL views for types and ship names. 
+* Adding SQL views for types and ship names.
+* Providing secure way to include or pass ENV variables to shiny application.
+* Installation of devtools
 
 ### 6. Instalation.
 #### 6.1. Leaflet and dependencies

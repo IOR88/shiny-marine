@@ -25,5 +25,6 @@ getLongestObservation <- function(observations){
     }
   }
   
-  c(distance, ob1, ob2)
+  robservations <- rbind(ob1, ob2)
+  c(distance, robservations)
 }
