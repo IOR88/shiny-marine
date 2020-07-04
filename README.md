@@ -73,10 +73,13 @@ or cannot be built and in order to solve.
 apt-get install libssl-dev libxml2-dev libcurl4-openssl-dev -y
 ```
 
+#### Shiny application tests 
+https://shiny.rstudio.com/articles/integration-testing.html
+
 ### 5. Improvements.
+* Implementing R shiny modules in order to simplify application logic
+and provide a better structure to the project https://shiny.rstudio.com/articles/modules.html
 * Adding SQL views for types and ship names.
-* Providing secure way to include or pass ENV variables to shiny application.
-* Installation of devtools and provide more unittests
 * Verify R dependencies to speed up building process, put R pakcages to intermediate
 container to avoid redundant builds.
 
