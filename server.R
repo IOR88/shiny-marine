@@ -15,6 +15,13 @@ if(!exists("getLongestObservation", mode="function")) source("observations.R")
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output, session) {
+    # First we observe value of select_ship_types if it is changed we load
+    # new set of ship names
+    # Next we observe on select_ship_names if it is changed we load a new
+    # set of observations from which we select 2 consecutive points which
+    # have greatest distance.
+    # From the data set we visualize observations on the map, list the
+    # observations in the table and provide the distance.
     
     observe({
         x <- input$select_ship_types
